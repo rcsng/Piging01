@@ -1,0 +1,6 @@
+{
+  "name": "PIGING — Lasa-Suri Cultural Culinary Heritage",
+  "description": "Interactive Philippine regional culinary heritage and Senior High School interdisciplinary archive exploring Luzon, Visayas, and Mindanao heirloom dishes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

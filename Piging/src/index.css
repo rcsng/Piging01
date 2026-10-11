@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Cinzel Decorative', 'Fraunces', Georgia, serif;
+    --font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+    --font-editorial: 'Lora', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #1E110B;
+    color: #F9F3EA;
+    overflow-x: hidden;
+  }
+}
+
+.font-filipiniana {
+  font-family: 'Cinzel Decorative', 'Fraunces', serif;
+}
+
+.font-woodblock {
+  font-family: 'Fraunces', 'Playfair Display', serif;
+}
+
+.font-editorial {
+  font-family: 'Lora', Georgia, serif;
+}
+
+/* Woven Sawali / Banig Diagonal Bamboo Texture (Splash Screen) */
+.bg-woven-bamboo {
+  background-color: #9E582F;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(61, 35, 20, 0.24) 0px,
+      rgba(61, 35, 20, 0.24) 2px,
+      transparent 2px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(61, 35, 20, 0.24) 0px,
+      rgba(61, 35, 20, 0.24) 2px,
+      transparent 2px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(232, 162, 56, 0.14) 0px,
+      rgba(232, 162, 56, 0.14) 14px,
+      rgba(140, 72, 34, 0.25) 14px,
+      rgba(140, 72, 34, 0.25) 28px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(214, 138, 58, 0.16) 0px,
+      rgba(214, 138, 58, 0.16) 14px,
+      rgba(115, 56, 24, 0.28) 14px,
+      rgba(115, 56, 24, 0.28) 28px
+    );
+}
+
+/* Terracotta Clay & Carved Wood Background */
+.bg-terracotta-carved {
+  background-color: #A03820;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(232, 162, 56, 0.1) 0%, transparent 55%),
+    radial-gradient(circle at 80% 85%, rgba(61, 35, 20, 0.35) 0%, transparent 60%),
+    repeating-linear-gradient(
+      35deg,
+      rgba(61, 35, 20, 0.08) 0px,
+      rgba(61, 35, 20, 0.08) 2px,
+      transparent 2px,
+      transparent 18px
+    ),
+    repeating-linear-gradient(
+      -35deg,
+      rgba(249, 243, 234, 0.03) 0px,
+      rgba(249, 243, 234, 0.03) 2px,
+      transparent 2px,
+      transparent 18px
+    );
+}
+
+/* Dark Narra / Kamagong Wood Plaque Texture */
+.bg-dark-wood {
+  background-color: #3D2314;
+  background-image:
+    linear-gradient(90deg, rgba(25, 13, 7, 0.45) 0%, rgba(92, 53, 30, 0.2) 50%, rgba(25, 13, 7, 0.45) 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.14) 0px,
+      rgba(0, 0, 0, 0.14) 3px,
+      transparent 3px,
+      transparent 11px
+    );
+}
+
+/* Vertical Bamboo Slat Border (Kawayan) */
+.bg-bamboo-slats {
+  background-color: #C58336;
+  background-image:
+    linear-gradient(180deg, rgba(61, 35, 20, 0.45) 0%, transparent 18%, transparent 82%, rgba(61, 35, 20, 0.5) 100%),
+    repeating-linear-gradient(
+      90deg,
+      #D99B4E 0px,
+      #E8AC5E 6px,
+      #B8732A 12px,
+      #703F13 14px,
+      #D99B4E 15px
+    );
+}
+
+/* Warm Tan Parchment Card */
+.bg-parchment-tan {
+  background-color: #C68964;
+  background-image:
+    radial-gradient(circle at 30% 25%, rgba(249, 243, 234, 0.12) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(255, 238, 220, 0.08) 0%, rgba(61, 35, 20, 0.12) 100%);
+}
+
+/* Subtle custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(61, 35, 20, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 162, 56, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 162, 56, 0.8);
+}

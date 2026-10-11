@@ -1,0 +1,76 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'rcsng07@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Default deny all unknown collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection test document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // User's private bookmarks & favorites
+    match /users/{userId}/favorites/{favoriteId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // User's private reflections & cultural journal
+    match /users/{userId}/reflections/{reflectionId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Public Dish Reviews & Ratings
+    match /dishReviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn() &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.rating is number &&
+        request.resource.data.rating >= 1 &&
+        request.resource.data.rating <= 5 &&
+        request.resource.data.comment is string &&
+        request.resource.data.comment.size() <= 2000;
+      allow update, delete: if isSignedIn() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+    }
+
+    // Community Heirloom Recipe Submissions & Review Queue
+    match /submittedRecipes/{recipeId} {
+      allow read: if true;
+      allow create: if isSignedIn() &&
+        request.resource.data.submitterId == request.auth.uid &&
+        request.resource.data.recipeName is string &&
+        request.resource.data.recipeName.size() <= 200 &&
+        request.resource.data.status in ['pending', 'approved', 'rejected'];
+      allow update: if isSignedIn() && (
+        resource.data.submitterId == request.auth.uid || isAdmin()
+      );
+      allow delete: if isSignedIn() && (
+        resource.data.submitterId == request.auth.uid || isAdmin()
+      );
+    }
+  }
+}

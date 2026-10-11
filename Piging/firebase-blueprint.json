@@ -1,0 +1,175 @@
+{
+  "entities": {
+    "UserFavorite": {
+      "title": "UserFavorite",
+      "description": "A dish bookmarked as a favorite by a user.",
+      "type": "object",
+      "properties": {
+        "dishId": {
+          "type": "string",
+          "description": "Identifier of the dish."
+        },
+        "dishName": {
+          "type": "string",
+          "description": "Name of the dish."
+        },
+        "regionName": {
+          "type": "string",
+          "description": "Region name of the dish."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when favorited."
+        }
+      },
+      "required": ["dishId", "createdAt"]
+    },
+    "UserReflection": {
+      "title": "UserReflection",
+      "description": "Cultural journal reflection and family recipe notes for a dish.",
+      "type": "object",
+      "properties": {
+        "dishId": {
+          "type": "string",
+          "description": "Associated dish ID."
+        },
+        "dishName": {
+          "type": "string",
+          "description": "Associated dish name."
+        },
+        "regionName": {
+          "type": "string",
+          "description": "Region of the dish."
+        },
+        "familyVariation": {
+          "type": "string",
+          "description": "Family variation of the recipe."
+        },
+        "culturalReflection": {
+          "type": "string",
+          "description": "Personal cultural reflection on food identity."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation."
+        }
+      },
+      "required": ["dishId", "culturalReflection", "createdAt"]
+    },
+    "DishReview": {
+      "title": "DishReview",
+      "description": "Rating and text review of an heirloom dish by a user.",
+      "type": "object",
+      "properties": {
+        "dishId": {
+          "type": "string",
+          "description": "ID of the reviewed dish."
+        },
+        "userId": {
+          "type": "string",
+          "description": "ID of the user who authored the review."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Display name of the reviewer."
+        },
+        "rating": {
+          "type": "number",
+          "description": "Star rating from 1 to 5."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Text review describing the culinary experience."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of the review."
+        }
+      },
+      "required": ["dishId", "userId", "rating", "comment", "createdAt"]
+    },
+    "SubmittedRecipe": {
+      "title": "SubmittedRecipe",
+      "description": "Community culinary heritage recipe submitted for curatorial review.",
+      "type": "object",
+      "properties": {
+        "recipeName": {
+          "type": "string",
+          "description": "Name of the heirloom recipe."
+        },
+        "island": {
+          "type": "string",
+          "description": "Island group (Luzon, Visayas, Mindanao)."
+        },
+        "region": {
+          "type": "string",
+          "description": "Originating region or province."
+        },
+        "ingredients": {
+          "type": "string",
+          "description": "List of authentic ingredients."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Step-by-step cooking method."
+        },
+        "cookingTime": {
+          "type": "string",
+          "description": "Estimated cooking time."
+        },
+        "servingSize": {
+          "type": "string",
+          "description": "Number of servings."
+        },
+        "culturalNotes": {
+          "type": "string",
+          "description": "Cultural lore, historical roots, and ancestral wisdom."
+        },
+        "submitterId": {
+          "type": "string",
+          "description": "User ID of the submitter."
+        },
+        "submitterName": {
+          "type": "string",
+          "description": "Name of the submitter."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected"],
+          "description": "Review status in the curatorial queue."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of submission."
+        }
+      },
+      "required": ["recipeName", "ingredients", "instructions", "submitterId", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/favorites/{favoriteId}": {
+      "schema": {
+        "$ref": "#/entities/UserFavorite"
+      },
+      "description": "Collection of dishes bookmarked by the user."
+    },
+    "/users/{userId}/reflections/{reflectionId}": {
+      "schema": {
+        "$ref": "#/entities/UserReflection"
+      },
+      "description": "Collection of philosophical and cultural reflections by the user."
+    },
+    "/dishReviews/{reviewId}": {
+      "schema": {
+        "$ref": "#/entities/DishReview"
+      },
+      "description": "Ratings and text reviews for dishes."
+    },
+    "/submittedRecipes/{recipeId}": {
+      "schema": {
+        "$ref": "#/entities/SubmittedRecipe"
+      },
+      "description": "Community submitted heirloom recipes in the review queue."
+    }
+  }
+}
